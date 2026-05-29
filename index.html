@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhinav Kolla — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,900&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F0E6;
+    --paper-2:#EBE5D6;
+    --ink:#17140F;
+    --ink-soft:#4A453B;
+    --accent:#2238E0;
+    --line:#1714200f;
+    --display:"Fraunces",Georgia,serif;
+    --body:"Hanken Grotesk",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--paper-2) 1px,transparent 1px);
+    background-size:22px 22px;
+  }
+  ::selection{background:var(--accent);color:var(--paper)}
+  header{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,5vw,64px);
+    background:color-mix(in srgb,var(--paper) 86%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .brand{font-family:var(--display);font-weight:900;font-size:21px;letter-spacing:-.02em}
+  .brand span{color:var(--accent)}
+  nav{display:flex;gap:6px;flex-wrap:wrap}
+  nav button{
+    font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em;
+    background:none;border:none;color:var(--ink-soft);cursor:pointer;
+    padding:8px 12px;border-radius:8px;transition:.2s;
+  }
+  nav button:hover{color:var(--ink);background:var(--paper-2)}
+  nav button.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+  main{max-width:1080px;margin:0 auto;padding:clamp(40px,7vw,90px) clamp(20px,5vw,64px)}
+  .page{display:none;animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+  .page.show{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .stagger>*{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
+  .stagger>*:nth-child(2){animation-delay:.06s}
+  .stagger>*:nth-child(3){animation-delay:.12s}
+  .stagger>*:nth-child(4){animation-delay:.18s}
+  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,8vw,92px);line-height:.96;letter-spacing:-.03em;margin-bottom:20px}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(28px,4.5vw,42px);letter-spacing:-.02em;margin-bottom:24px}
+  h3{font-family:var(--display);font-weight:600;font-size:24px;letter-spacing:-.01em}
+  p{max-width:62ch;color:var(--ink-soft);margin-bottom:16px}
+  p strong{color:var(--ink)}
+  a.link{color:var(--accent);text-decoration:none;border-bottom:1.5px solid color-mix(in srgb,var(--accent) 35%,transparent);transition:.2s}
+  a.link:hover{border-color:var(--accent)}
+  .hero{min-height:62vh;display:flex;flex-direction:column;justify-content:center}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .lead{font-size:clamp(19px,2.4vw,23px);max-width:60ch}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .btn{font-family:var(--mono);font-size:14px;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;padding:13px 22px;border-radius:10px;cursor:pointer;border:1.5px solid var(--ink);transition:.2s;display:inline-block}
+  .btn.solid{background:var(--ink);color:var(--paper)}
+  .btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+  .btn.ghost{background:none;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .about-grid{display:grid;grid-template-columns:300px 1fr;gap:48px;align-items:start}
+  .portrait{aspect-ratio:4/5;border-radius:16px;border:1px solid var(--line);
+    background:linear-gradient(135deg,var(--paper-2),var(--paper));
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:var(--mono);font-size:12px;color:var(--ink-soft);padding:20px}
+  .facts{list-style:none;margin-top:26px;border-top:1px solid var(--line)}
+  .facts li{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);font-size:16px}
+  .facts li span:first-child{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
+  .resume-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:10px}
+  .res-block{margin-top:40px}
+  .res-label{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:22px}
+  .res-row{display:grid;grid-template-columns:180px 1fr;gap:28px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .res-date{font-family:var(--mono);font-size:14px;color:var(--ink-soft);padding-top:2px}
+  .res-row p{margin:6px 0 0;font-size:16px}
+  .res-row .where{font-weight:600;color:var(--ink);font-size:17px}
+  .res-row .role{font-size:15px;color:var(--ink-soft);font-style:italic;margin-bottom:2px}
+  .skills{display:flex;flex-wrap:wrap;gap:10px}
+  .skills span{font-family:var(--mono);font-size:13px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}
+  .project{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding:48px 0;border-bottom:1px solid var(--line)}
+  .project:nth-child(even) .shot{order:-1}
+  .meta{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-bottom:14px;letter-spacing:.02em}
+  .shot{aspect-ratio:16/11;border-radius:14px;border:1px solid var(--line);overflow:hidden;
+    background:repeating-linear-gradient(45deg,var(--paper) 0 12px,var(--paper-2) 12px 24px);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:var(--mono);font-size:12px;color:var(--ink-soft);padding:20px;transition:.3s}
+  .project:hover .shot{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(20,16,20,.35)}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
+  .tags span{font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:6px;background:var(--paper-2);color:var(--ink-soft)}
+  footer{text-align:center;padding:50px 20px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);border-top:1px solid var(--line)}
+  @media(max-width:760px){
+    .about-grid,.project{grid-template-columns:1fr}
+    .project:nth-child(even) .shot{order:0}
+    .res-row{grid-template-columns:1fr;gap:4px}
+    .portrait{max-width:280px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Abhinav Kolla<span>.</span></div>
+  <nav>
+    <button data-go="home" class="active">Home</button>
+    <button data-go="about">About Me</button>
+    <button data-go="resume">Resume</button>
+    <button data-go="projects">Projects</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <section id="home" class="page show">
+    <div class="hero stagger">
+      <div class="eyebrow">Computer Science Essentials · Portfolio</div>
+      <h1>Hi, I'm Abhinav.<br>I build <em>websites</em> and <em>games</em>.</h1>
+      <p class="lead">Student at Emerald High School in Dublin, California. I work mostly in Python and JavaScript, and I'm always picking up something new.</p>
+      <div class="cta">
+        <button class="btn solid" data-go="projects">View my work</button>
+        <button class="btn ghost" data-go="about">About me</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ME -->
+  <section id="about" class="page">
+    <div class="stagger">
+      <div class="eyebrow">About Me</div>
+      <h2>Get to know me</h2>
+      <div class="about-grid">
+        <div>
+          <div class="portrait">Replace with a photo of you<br>(name it <b>me.jpg</b> in your repo)</div>
+          <ul class="facts">
+            <li><span>Location</span><span>Dublin, California</span></li>
+            <li><span>School</span><span>Emerald High School</span></li>
+            <li><span>Focus</span><span>Web & Game Development</span></li>
+            <li><span>Email</span><span>kolla4722@mydusd.org</span></li>
+          </ul>
+        </div>
+        <div>
+          <p>I got into computer science because both of my parents are software engineers, so it has been part of my life for as long as I can remember. Watching them build software is what made me want to do the same.</p>
+          <p>I mostly build <strong>websites and games</strong>, working in Python and JavaScript. I like the side of CS where you can actually see what you made: front-end work, interactive stuff, and small games you can play with friends.</p>
+          <p>Outside of code, I play a lot of basketball and pick up games of soccer and football whenever I can. Team sports keep me sharp and balance out the time I spend at a screen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume" class="page">
+    <div class="stagger">
+      <div class="eyebrow">Resume</div>
+      <div class="resume-head">
+        <h2>Resume</h2>
+        <a class="btn ghost" href="resume.pdf" target="_blank">Download PDF</a>
+      </div>
+
+      <div class="res-block">
+        <div class="res-label">Education</div>
+        <div class="res-row">
+          <div class="res-date">2025 – Present</div>
+          <div>
+            <div class="where">Emerald High School</div>
+            <p>Dublin, CA · Freshman · Computer Science Essentials, Robotics Club</p>
+          </div>
+        </div>
+        <div class="res-row">
+          <div class="res-date">2022 – 2025</div>
+          <div>
+            <div class="where">Fallon Middle School</div>
+            <p>Dublin, CA</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-block">
+        <div class="res-label">Experience</div>
+        <div class="res-row">
+          <div class="res-date">Aug 2025 – Feb 2026</div>
+          <div>
+            <div class="where">Baskin Robbins</div>
+            <div class="role">Team Member</div>
+            <p>Provided customer service, handled food preparation, and worked efficiently in a fast-paced team environment.</p>
+          </div>
+        </div>
+        <div class="res-row">
+          <div class="res-date">2025 – Present</div>
+          <div>
+            <div class="where">Alameda County Library</div>
+            <div class="role">Volunteer</div>
+            <p>Assisted library staff and supported community members, helping organize resources and contribute to local programs.</p>
+          </div>
+        </div>
+        <div class="res-row">
+          <div class="res-date">2022 – Present</div>
+          <div>
+            <div class="where">Hindu Temple, Livermore</div>
+            <div class="role">Volunteer</div>
+            <p>Assisted with community service events and outreach efforts, contributing to hospitality and event coordination.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="res-block">
+        <div class="res-label">Skills</div>
+        <div class="skills">
+          <span>Java</span>
+          <span>HTML</span>
+          <span>Python</span>
+          <span>JavaScript</span>
+          <span>CSS</span>
+          <span>CPR Certified</span>
+        </div>
+      </div>
+
+      <div class="res-block">
+        <div class="res-label">Awards</div>
+        <div class="res-row">
+          <div class="res-date">2025</div>
+          <div>
+            <div class="where">1st Place — Martial Arts Tournament</div>
+          </div>
+        </div>
+        <div class="res-row">
+          <div class="res-date">2025</div>
+          <div>
+            <div class="where">2nd Place — California State Archery Tournament</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="res-block">
+        <div class="res-label">Activities</div>
+        <div class="res-row">
+          <div class="res-date">Ongoing</div>
+          <div>
+            <div class="where">Taekwondo — Black Belt</div>
+            <p>Achieved black belt rank through years of dedicated training and competition.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="page">
+    <div class="stagger">
+      <div class="eyebrow">Projects</div>
+      <h2>Selected work</h2>
+
+      <article class="project">
+        <div>
+          <div class="meta">COMBOMENU · Computer Science Essentials · 2025–2026</div>
+          <h3>COMBOMENU</h3>
+          <div class="tags"><span>Python</span><span>Command Line</span><span>Input Validation</span></div>
+          <p><strong>Objective:</strong> A terminal-based sandwich shop ordering system that walks customers through a full combo order — choosing a sandwich, beverage, fries, and ketchup packets — with a $1 combo discount applied automatically at checkout.</p>
+          <p><strong>My role:</strong> Designed and coded the entire ordering flow in Python, including item pricing logic, nested input validation loops, order tracking with a list, and the receipt printing function.</p>
+          <p><strong>What I learned:</strong> How to use while loops for input validation, how to track running totals and state across multiple user inputs, and how to structure a real program with functions and conditional logic.</p>
+          <a class="link" href="project1-docs.pdf" target="_blank">View project documentation →</a>
+        </div>
+        <div class="shot" style="padding:0;background:#111;">
+          <video width="100%" height="100%" style="display:block;border-radius:13px;object-fit:cover;" controls muted playsinline>
+            <source src="combomenu-demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </article>
+
+      <article class="project">
+        <div>
+          <div class="meta">[Project Name] · [Course] · [Dates]</div>
+          <h3>[Project Title]</h3>
+          <div class="tags"><span>[Tech]</span><span>[Tech]</span><span>[Tech]</span></div>
+          <p><strong>Objective:</strong> [What it does / the goal.]</p>
+          <p><strong>My role:</strong> [What you personally built.]</p>
+          <p><strong>What I learned:</strong> [Skills + takeaways.]</p>
+          <a class="link" href="project2-docs.pdf" target="_blank">View project documentation →</a>
+        </div>
+        <div class="shot">Replace with a screenshot or video of Project 2</div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>© <span id="yr"></span> Abhinav Kolla · Built with HTML, CSS &amp; a little AI · kolla4722@mydusd.org</footer>
+
+<script>
+  const pages=document.querySelectorAll('.page');
+  const btns=document.querySelectorAll('[data-go]');
+  function go(id){
+    pages.forEach(p=>p.classList.toggle('show',p.id===id));
+    document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.go===id));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
